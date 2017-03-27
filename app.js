@@ -2,15 +2,18 @@
 
 const moment              = require('moment');
 const contentful          = require('contentful')
-const values              = require('./setup');
+const values              = require('./config');
+const Table               = require('cli-table');
 
 /*
-setup.js contains something like this
+config.js contains something like this
 
-exports.settings = {
-  spaceId     : 'ikuhazn2m6br',
-  accessToken : '53d84f2621c3cf041ed81872aea607364aac0bff7da155897a51bf6d85a7bd5e',
-  contentType : 'monthEntry'
+module.exports = {
+  contentful : {
+    spaceId     : 'space_id',
+    accessToken : 'access_token',
+    contentType : 'content type'
+  }
 }
 
 Implemented it this way so I could change data sources without revealing my access token or space name
@@ -25,15 +28,14 @@ var baseline = {
 }
 
 const client = contentful.createClient({
-  space       : values.settings.spaceId,
-  accessToken : values.settings.accessToken
+  space       : values.contentful.spaceId,
+  accessToken : values.contentful.accessToken
 })
 
 client.getEntries({
-  'content_type' : values.settings.contentType,
+  'content_type' : values.contentful.contentType,
   'order' : "fields.monthYear"
 }).then((response) => {
-    var Table = require('cli-table');
     var table = new Table({
         head: ['Date', 'Events', 'CF Libraries', 'Other Libraries', 'Talks', 'BlogPosts']
       //, colWidths: [50, 50]
