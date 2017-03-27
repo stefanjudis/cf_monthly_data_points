@@ -2,12 +2,12 @@
 
 This is an experiment in creating a simple data source in Contentful, and a quick and dirty CLI to retrieve the values in a nice-looking table.
 
-## Sample output
+## Sample output (it looks ok on the Terminal)
 
 ```
-┌───────────────┬───────────┬──────────────┬─────────────────┬───────────┬───────────┐
-│ Date          │ Events    │ CF Libraries │ Other Libraries │ Talks     │ BlogPosts │
-├───────────────┼───────────┼──────────────┼─────────────────┼───────────┼───────────┤
+┌───────────────┬────────────┬──────────────┬─────────────────┬───────────┬───────────┐
+│ Date          │ Events     │ CF Libraries │ Other Libraries │ Talks     │ BlogPosts │
+├───────────────┼────────────┼──────────────┼─────────────────┼───────────┼───────────┤
 │ January 2017  │ 0➖ [ 1⬇ ] │ 0➖ [ 2⬆ ]    │ 0➖ [ 3⬇ ]       │ 0➖ [ 4⬆ ] │ 0➖ [ 5⬇ ] │
 ├───────────────┼───────────┼──────────────┼─────────────────┼───────────┼───────────┤
 │ February 2017 │ 1➖ [ 1⬇ ] │ 2➖ [ 2⬆ ]    │ 3➖ [ 3⬇ ]       │ 0➖ [ 4⬆ ] │ 3➖ [ 5⬇ ] │
