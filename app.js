@@ -2,8 +2,10 @@
 
 const moment              = require('moment');
 const contentful          = require('contentful')
-const values              = require('./config');
+const config              = require('./config');
 const Table               = require('cli-table');
+const upArrow             = '⬆';
+const dwArrow             = '⬇';
 
 /*
 config.js contains something like this
@@ -28,12 +30,12 @@ var baseline = {
 }
 
 const client = contentful.createClient({
-  space       : values.contentful.spaceId,
-  accessToken : values.contentful.accessToken
+  space       : config.contentful.spaceId,
+  accessToken : config.contentful.accessToken
 })
 
 client.getEntries({
-  'content_type' : values.contentful.contentType,
+  'content_type' : config.contentful.contentType,
   'order' : "fields.monthYear"
 }).then((response) => {
     var table = new Table({
@@ -45,14 +47,19 @@ client.getEntries({
       var month = myDate.format('MMMM')
       var year  = myDate.format('YYYY')
 
+
+      // TOFIX:
+      // this is supposed to comare with prev month
+      // the idea is that each entry shows the delta from the previous month
+
       table.push(
           [
             month + ' ' + year,
-            val.fields.eventsAttended,
-            val.fields.contentfulLibraries,
-            val.fields.communityLibraries,
-            val.fields.talks,
-            val.fields.blogposts
+            val.fields.eventsAttended       + '➖ [ ' + 1 + dwArrow + ' ]',
+            val.fields.contentfulLibraries  + '➖ [ ' + 2 + upArrow + ' ]',
+            val.fields.communityLibraries   + '➖ [ ' + 3 + dwArrow + ' ]',
+            val.fields.talks                + '➖ [ ' + 4 + upArrow + ' ]',
+            val.fields.blogposts            + '➖ [ ' + 5 + dwArrow + ' ]',
           ]
       );
     })
