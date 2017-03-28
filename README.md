@@ -12,7 +12,7 @@ This is an experiment in creating a simple data source in Contentful, and a quic
 module.exports = {
   contentful : {
     spaceId     : 'space_id',
-    accessToken : 'access_to0ken',
+    accessToken : 'access_token',
     contentType : 'monthEntry'
   }
 }
