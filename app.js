@@ -4,9 +4,6 @@ const moment              = require('moment');
 const contentful          = require('contentful');
 const config              = require('./config');
 const Table               = require('cli-table');
-const upArrow             = '⬆';
-const dwArrow             = '⬇';
-
 /*
 config.js contains something like this
 
@@ -81,6 +78,8 @@ client.getEntries({
 
 function getDiff(val,tag){
   var out;
+  const upArrow             = '⬆';
+  const dwArrow             = '⬇';
 
   switch (tag){
     case 'events' :
