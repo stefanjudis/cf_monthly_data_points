@@ -1,7 +1,7 @@
 'use strict'
 
 const moment              = require('moment');
-const contentful          = require('contentful')
+const contentful          = require('contentful');
 const config              = require('./config');
 const Table               = require('cli-table');
 const upArrow             = '⬆';
@@ -21,13 +21,22 @@ module.exports = {
 Implemented it this way so I could change data sources without revealing my access token or space name
 */
 
+// this is in case we want to account for
 var baseline = {
-  events_attended       : 100,
-  contentful_libraries  : 100,
-  community_libraries   : 100,
-  talks                 : 100,
-  blogposts             : 100
+  events        : 100,
+  cf_libs       : 100,
+  other_libs    : 100,
+  talks         : 100,
+  blogposts     : 100
 }
+
+var previous = {
+  events      : 0,
+  cf_libs     : 0,
+  other_libs  : 0,
+  talks       : 0,
+  blogposts   : 0
+};
 
 const client = contentful.createClient({
   space       : config.contentful.spaceId,
@@ -49,19 +58,24 @@ client.getEntries({
 
 
       // TOFIX:
-      // this is supposed to comare with prev month
+      // this is supposed to compare with previous month
       // the idea is that each entry shows the delta from the previous month
 
       table.push(
           [
             month + ' ' + year,
-            val.fields.eventsAttended       + '➖ [ ' + 1 + dwArrow + ' ]',
-            val.fields.contentfulLibraries  + '➖ [ ' + 2 + upArrow + ' ]',
-            val.fields.communityLibraries   + '➖ [ ' + 3 + dwArrow + ' ]',
-            val.fields.talks                + '➖ [ ' + 4 + upArrow + ' ]',
-            val.fields.blogposts            + '➖ [ ' + 5 + dwArrow + ' ]',
+            val.fields.eventsAttended       + getDiff(val.fields.eventsAttended,'events')        ,
+            val.fields.contentfulLibraries  + getDiff(val.fields.contentfulLibraries,'cf_libs')  ,
+            val.fields.communityLibraries   + getDiff(val.fields.communityLibraries,'other_libs'),
+            val.fields.talks                + getDiff(val.fields.talks, 'talks')                 ,
+            val.fields.blogposts            + getDiff(val.fields.blogposts,'blogposts')          ,
           ]
       );
+      previous.events     = val.fields.eventsAttended;
+      previous.cf_libs    = val.fields.contentfulLibraries;
+      previous.other_libs = val.fields.communityLibraries;
+      previous.talks      = val.fields.talks ;
+      previous.blogposts  = val.fields.blogposts;
     })
     //console.log(JSON.stringify(out, false, '\t'));)
     console.log(table.toString())
@@ -69,3 +83,35 @@ client.getEntries({
     console.log('\x1b[31merror occured')
     console.log(error)
 })
+
+function getDiff(val,tag){
+  var out;
+
+  switch (tag){
+    case 'events' :
+      out = (val - previous.events);
+      break;
+    case 'cf_libs' :
+      out = (val - previous.cf_libs);
+      break;
+    case 'other_libs' :
+      out = (val - previous.other_libs);
+      break;
+    case 'talks' :
+      out = (val - previous.talks);
+      break;
+    case 'blogposts' :
+      out = (val - previous.blogposts);
+      break;
+  }
+  if (out > 0){
+    out = '\x1b[32m' + ' (' + out;
+    out += upArrow;
+    out += ' )'
+  }else if (out < 0){
+    out = '\x1b[31m' + ' (' + out;
+    out += dwArrow;
+    out += ' )'
+  }
+  return out;
+}
