@@ -55,12 +55,7 @@ client.getEntries({
       var myDate = moment(val.fields.monthYear, 'YYYY/MM/DD')
       var month = myDate.format('MMMM')
       var year  = myDate.format('YYYY')
-
-
-      // TOFIX:
-      // this is supposed to compare with previous month
-      // the idea is that each entry shows the delta from the previous month
-
+      
       table.push(
           [
             month + ' ' + year,
