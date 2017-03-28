@@ -18,6 +18,8 @@ module.exports = {
 }
 ```
 
+- run `npm start`
+
 # Sample output
 
 ![](http://drops.ricardoalcocer.com/contentful_drops/Screen%20Shot%202017-03-28%20at%2010.04.46%20AM.png)
