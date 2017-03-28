@@ -21,7 +21,7 @@ module.exports = {
 Implemented it this way so I could change data sources without revealing my access token or space name
 */
 
-// this is in case we want to account for
+// this is in case we want to account for data before we started using this tool
 var baseline = {
   events        : 100,
   cf_libs       : 100,
@@ -48,14 +48,14 @@ client.getEntries({
   'order' : "fields.monthYear"
 }).then((response) => {
     var table = new Table({
-        head: ['Date', 'Events', 'CF Libraries', 'Other Libraries', 'Talks', 'BlogPosts']
+        head: ['Date', 'Events', 'CF Libs', 'Other Libs', 'Talks', 'BlogPosts']
       //, colWidths: [50, 50]
     });
     response.items.forEach(function(val){
       var myDate = moment(val.fields.monthYear, 'YYYY/MM/DD')
       var month = myDate.format('MMMM')
       var year  = myDate.format('YYYY')
-      
+
       table.push(
           [
             month + ' ' + year,
@@ -100,13 +100,13 @@ function getDiff(val,tag){
       break;
   }
   if (out > 0){
-    out = '\x1b[32m' + ' (' + out;
+    out = '\x1b[32m' + ' [' + out;
     out += upArrow;
-    out += ' )'
+    out += ' ]'
   }else if (out < 0){
-    out = '\x1b[31m' + ' (' + out;
+    out = '\x1b[31m' + ' [' + out;
     out += dwArrow;
-    out += ' )'
+    out += ' ]'
   }
   return out;
 }
