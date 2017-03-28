@@ -2,16 +2,6 @@
 
 This is an experiment in creating a simple data source in Contentful, and a quick and dirty CLI to retrieve the values in a nice-looking table.
 
-## Sample output (it looks ok on the Terminal) 
+## Sample output
 
-```
-┌───────────────┬────────────┬──────────────┬─────────────────┬───────────┬───────────┐
-│ Date          │ Events     │ CF Libraries │ Other Libraries │ Talks     │ BlogPosts │
-├───────────────┼────────────┼──────────────┼─────────────────┼───────────┼───────────┤
-│ January 2017  │ 0➖ [ 1⬇ ] │ 0➖ [ 2⬆ ]    │ 0➖ [ 3⬇ ]       │ 0➖ [ 4⬆ ] │ 0➖ [ 5⬇ ] │
-├───────────────┼───────────┼──────────────┼─────────────────┼───────────┼───────────┤
-│ February 2017 │ 1➖ [ 1⬇ ] │ 2➖ [ 2⬆ ]    │ 3➖ [ 3⬇ ]       │ 0➖ [ 4⬆ ] │ 3➖ [ 5⬇ ] │
-├───────────────┼───────────┼──────────────┼─────────────────┼───────────┼───────────┤
-│ March 2017    │ 1➖ [ 1⬇ ] │ 2➖ [ 2⬆ ]    │ 3➖ [ 3⬇ ]       │ 4➖ [ 4⬆ ] │ 5➖ [ 5⬇ ] │
-└───────────────┴───────────┴──────────────┴─────────────────┴───────────┴───────────┘
-```
+![](http://drops.ricardoalcocer.com/contentful_drops/Screen%20Shot%202017-03-28%20at%2010.04.46%20AM.png)
