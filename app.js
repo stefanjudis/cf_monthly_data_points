@@ -77,35 +77,40 @@ client.getEntries({
 })
 
 function getDiff(val,tag){
-  var out;
+  var diff,out;
   const upArrow             = '⬆';
   const dwArrow             = '⬇';
 
   switch (tag){
     case 'events' :
-      out = (val - previous.events);
+      diff = (val - previous.events);
       break;
     case 'cf_libs' :
-      out = (val - previous.cf_libs);
+      diff = (val - previous.cf_libs);
       break;
     case 'other_libs' :
-      out = (val - previous.other_libs);
+      diff = (val - previous.other_libs);
       break;
     case 'talks' :
-      out = (val - previous.talks);
+      diff = (val - previous.talks);
       break;
     case 'blogposts' :
-      out = (val - previous.blogposts);
+      diff = (val - previous.blogposts);
       break;
   }
-  if (out > 0){
-    out = '\x1b[32m' + ' [' + out;
+
+  if (diff > 0){
+    out = '\x1b[32m' + ' [';
+    out += diff;
     out += upArrow;
     out += ' ]'
-  }else if (out < 0){
-    out = '\x1b[31m' + ' [' + out;
+  }else if (diff < 0){
+    out = '\x1b[31m' + ' [';
+    out += diff;
     out += dwArrow;
     out += ' ]'
+  }else{
+    out = diff;
   }
   return out;
 }
