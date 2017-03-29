@@ -106,7 +106,7 @@ function getDiff(val,tag){
     out += ' ]'
   }else if (diff < 0){
     out = '\x1b[31m' + ' [';
-    out += diff;
+    out += diff * -1;
     out += dwArrow;
     out += ' ]'
   }else{
