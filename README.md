@@ -22,4 +22,4 @@ module.exports = {
 
 # Sample output
 
-![](http://drops.ricardoalcocer.com/contentful_drops/Screen%20Shot%202017-03-28%20at%2010.04.46%20AM.png)
+![](http://drops.ricardoalcocer.com/contentful_drops/Screen%20Shot%202017-03-30%20at%202.23.31%20PM.png)
