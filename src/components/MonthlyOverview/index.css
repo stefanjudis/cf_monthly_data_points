@@ -1,0 +1,8 @@
+.monthlyOverviewTable {
+  width : 100%;
+  text-align : center;
+}
+
+.monthlyOverviewTable thead {
+  font-weight : 600;
+}
